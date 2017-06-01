@@ -10,7 +10,7 @@ const apiRoutes = require('./server/apiRoutes')
 app.use(volleyball)
 
 //serve static files
-express.static('public')
+app.use(express.static('public'))
 
 //body parser
 app.use(bodyParser.json())
@@ -19,9 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //routing for all api calls
 app.use('/api', apiRoutes)
 
-
 app.get('*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, './client/index.html'))
+  res.sendFile(path.join(__dirname, 'index.html'))
 })
 
 //error handler
