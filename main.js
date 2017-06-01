@@ -2,9 +2,9 @@ const express = require('express')
 const app = express()
 const volleyball = require('volleyball')
 const bodyParser = require('body-parser')
-
-const apiRoutes = require('./apiRoutes')
 const path = require('path');
+
+const apiRoutes = require('./server/apiRoutes')
 
 //logging middleware
 app.use(volleyball)
@@ -21,7 +21,7 @@ app.use('/api', apiRoutes)
 
 
 app.get('*', (req, res, next) => {
-  res.sendFile(path.join(__dirname, '../index.html'))
+  res.sendFile(path.join(__dirname, './client/index.html'))
 })
 
 //error handler
