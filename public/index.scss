@@ -1,0 +1,7 @@
+$all-font: 1.5em;
+$main-color: purple;
+
+* {
+  font-size: $all-font;
+  text-shadow: 4px 3px $main-color;
+}
