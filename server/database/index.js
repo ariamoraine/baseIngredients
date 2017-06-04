@@ -1,7 +1,4 @@
-const Sequelize = require('sequelize')
-
-const db = new Sequelize('postgres://localhost:5432/baseIngredients', {
-})
+const db = require('./models/db')
+const User = require('./models/user')
 
 module.exports = db
-

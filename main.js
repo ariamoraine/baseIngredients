@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const path = require('path');
 
 const apiRoutes = require('./server/apiRoutes')
-const db = require('./server/database/models')
+const db = require('./server/database')
 
 //logging middleware
 app.use(volleyball)
@@ -31,9 +31,8 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error!')
 })
 
-db.sync()
-  .then( (res) => {
-    console.log(res)
+db.sync({force: true})
+  .then( () => {
     app.listen(3030, () => console.log("Server is listening on port 3030"))
   })
   .catch(console.error);
