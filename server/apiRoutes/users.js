@@ -36,6 +36,11 @@ userRouter.post('/signup', (req, res, next) => {
     .catch(next)
 })
 
+userRouter.post('/logout', (req, res, next) => {
+  req.logout()
+  res.sendStatus(200)
+})
+
 userRouter.put('/:userId', (req, res, next) => {
   console.log('User Router PUT to /:userId', req.params.userId)
 })
