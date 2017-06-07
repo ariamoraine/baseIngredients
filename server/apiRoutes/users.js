@@ -25,6 +25,7 @@ userRouter.post('/login', (req, res, next) => {
   .catch(next)
 })
 
+
 userRouter.put('/:userId', (req, res, next) => {
   console.log('User Router PUT to /:userId', req.params.userId)
 })
