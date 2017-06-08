@@ -5,6 +5,10 @@ userRouter.get('/', (req, res, next) => {
   res.send('User Router GET to /')
 })
 
+userRouter.get('/me', (req, res, next) => {
+  res.json(req.user)
+})
+
 userRouter.post('/login', (req, res, next) => {
   User.findOne({
     where: {
