@@ -1,26 +1,29 @@
 const userRouter = require('express').Router()
-const User = require('../database/models/user')
+const user = require('../database/models/user')
 
 userRouter.get('/', (req, res, next) => {
   res.send('User Router GET to /')
 })
 
 userRouter.get('/me', (req, res, next) => {
+  console.log(req.user)
   res.json(req.user)
 })
 
 userRouter.post('/login', (req, res, next) => {
-  User.findOne({
+  console.log('INSIDE LOGIN ---------------------')
+  user.findOne({
     where: {
       email: req.body.email
     }
   })
   .then(user => {
+    console.log("IM A USER______________", user)
     if (!user) res.status(401).send('User not found')
-    else if (!user.hasMatchingPassword(req.body.password)) {
+    else if (!user.correctPassword(req.body.password)) {
       res.status(401).send('Incorrect Password')
     } else {
-      req.login(user, err => {
+      req.logIn(user, err => {
         if (err) next(err)
         else res.json(user)
       })

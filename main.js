@@ -6,6 +6,7 @@ const path = require('path');
 
 const apiRoutes = require('./server/apiRoutes')
 const db = require('./server/database')
+const User = require('./server/database/models/user')
 //sessions and storing sessions in Sequelize
 const passport = require('passport')
 const session = require('express-session')
@@ -41,9 +42,12 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user)
+  User.findById(id)
+  .then(user => {
+    if (!user) console.error("IM NOT A USER")
+    done(null, user)
   })
+  .catch(console.error)
 })
 
 //routing for all api calls
@@ -62,7 +66,7 @@ app.use((err, req, res, next) => {
 })
 
 //sync the DB and then start the server lisening
-db.sync({force: true})
+db.sync()
   .then(() => {
     app.listen(3030, () => console.log("Server is listening on port 3030"))
   })
