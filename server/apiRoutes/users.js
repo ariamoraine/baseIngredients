@@ -6,19 +6,16 @@ userRouter.get('/', (req, res, next) => {
 })
 
 userRouter.get('/me', (req, res, next) => {
-  console.log(req.user)
   res.json(req.user)
 })
 
 userRouter.post('/login', (req, res, next) => {
-  console.log('INSIDE LOGIN ---------------------')
   user.findOne({
     where: {
       email: req.body.email
     }
   })
   .then(user => {
-    console.log("IM A USER______________", user)
     if (!user) res.status(401).send('User not found')
     else if (!user.correctPassword(req.body.password)) {
       res.status(401).send('Incorrect Password')
