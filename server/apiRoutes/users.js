@@ -1,5 +1,5 @@
 const userRouter = require('express').Router()
-const user = require('../database/models/user')
+const User = require('../database/models/user')
 
 userRouter.get('/', (req, res, next) => {
   res.send('User Router GET to /')
@@ -10,7 +10,7 @@ userRouter.get('/me', (req, res, next) => {
 })
 
 userRouter.post('/login', (req, res, next) => {
-  user.findOne({
+  User.findOne({
     where: {
       email: req.body.email
     }
