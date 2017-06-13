@@ -6,7 +6,7 @@ userRouter.get('/', (req, res, next) => {
 })
 
 userRouter.get('/me', (req, res, next) => {
-  res.json(req.user)
+  res.send(req.user)
 })
 
 userRouter.post('/login', (req, res, next) => {
@@ -34,7 +34,8 @@ userRouter.post('/signup', (req, res, next) => {
     .then(user => {
       req.login(user, err => {
         if (err) next(err)
-        else res.json(user)
+        //else res.json(user)
+        else res.send(404)
       })
     })
     .catch(next)
