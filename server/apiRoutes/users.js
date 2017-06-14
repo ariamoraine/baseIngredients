@@ -34,8 +34,7 @@ userRouter.post('/signup', (req, res, next) => {
     .then(user => {
       req.login(user, err => {
         if (err) next(err)
-        //else res.json(user)
-        else res.send(404)
+        else res.json(user)
       })
     })
     .catch(next)

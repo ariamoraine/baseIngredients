@@ -5,34 +5,35 @@ const expect = require('chai').expect,
   request = require('supertest'),
   agent = request.agent(app);
 
-// describe('POST', () => {
-//   describe('when a user is not logged in', () => {
-//     it('creates a user', () => {
-//       request(app)
-//         .post('/api/users/signup')
-//         .send({
-//           email: 'test@test.com',
-//           password: '1234'
-//         })
-//         .then((res) => {
-//           console.log("WTF")
-//           console.log("I'm the body", res)
-//         })
-//     })
-//   })
-// })
-
-describe('GET', () => {
-  before('Await database sync', () => db.didSync)
+describe("Something ", () =>{
+  beforeEach('Await database sync', () => db.sync({force: true, logging: false}))
   afterEach('Clear the tables', () => db.truncate({ cascade: true }))
 
-  describe('when we get to users/me', () => {
-    it('returns undefined if there is no user logged in', () => {
-      return agent
-        .get('/api/users/me')
-        .then(res => {
-          expect(res.body).to.deep.equal({})
+  describe('GET', () => {
+    describe('when we get to users/me', () => {
+      xit('returns undefined if there is no user logged in', () => {
+        return agent
+          .get('/api/users/me')
+          .then(res => {
+            expect(res.body).to.deep.equal({})
+        })
       })
     })
   })
+
+  describe('POST', () => {
+    it('creates a new user', () => {
+      return agent
+        .post('/api/users/signup')
+        .send({
+          email: 'testuser@test.com',
+          password: '12345'
+        })
+        .then(res => {
+          expect(res.body.email).to.equal('testuser@test.com')
+        })
+    })
+  })
 })
+
+
