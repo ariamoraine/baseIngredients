@@ -66,10 +66,12 @@ app.use((err, req, res, next) => {
 })
 
 //sync the DB and then start the server lisening
-db.sync()
-  .then(() => {
-    app.listen(3030, () => console.log("Server is listening on port 3030"))
-  })
-  .catch(console.error);
+if (module === require.main) {
+  db.sync()
+    .then(() => {
+      app.listen(3030, () => console.log("Server is listening on port 3030"))
+    })
+    .catch(console.error)
+}
 
 module.exports = app

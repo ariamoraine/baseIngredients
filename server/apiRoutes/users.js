@@ -32,9 +32,11 @@ userRouter.post('/login', (req, res, next) => {
 userRouter.post('/signup', (req, res, next) => {
   User.create(req.body)
     .then(user => {
-      req.login(user, err => {
+      req.logIn(user, err => {
         if (err) next(err)
-        else res.json(user)
+        else {
+          res.json(user)
+        }
       })
     })
     .catch(next)
