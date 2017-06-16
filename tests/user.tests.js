@@ -6,7 +6,7 @@ const expect = require('chai').expect,
   request = require('supertest'),
   agent = request.agent(app);
 
-describe("Hooks", function () {
+describe("USER ROUTES", function () {
   before('syncing DB', function () {
     return db.truncate({ cascade: true })
   })
@@ -20,7 +20,7 @@ describe("Hooks", function () {
       })
     })
 
-    it('we create a new user', function () {
+    it('we create a new user by posting to the users/signup', function () {
       return agent
         .post('/api/users/signup')
         .send({
